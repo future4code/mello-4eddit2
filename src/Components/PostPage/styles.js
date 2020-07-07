@@ -35,6 +35,7 @@ export const PostFooter = styled.div`
 `
 export const IconImage = styled.img`
     height: 20px;
+    cursor: pointer;
 `
 export const CommentContainer = styled.div`
     border: 1px solid gray;
@@ -47,4 +48,8 @@ export const CommentInputContainer = styled.div`
     margin-top: 10px;
     display: flex;
     flex-direction: column;
+`
+export const Input = styled.input`
+    text-align: center;
+    color: black;
 `

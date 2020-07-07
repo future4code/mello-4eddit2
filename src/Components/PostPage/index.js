@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { AppContainer, PostContainer, PostHeader, PostFooter, PostText, IconImage, CommentContainer, CommentInputContainer } from './styles'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
+
+import { AppContainer, PostContainer, PostHeader, PostFooter, PostText, IconImage, CommentContainer, CommentInputContainer, Input } from './styles'
 import upIcon from '../../images/up.svg'
 import downIcon from '../../images/down.svg'
 
 const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
-function FeedPage() {
-  const [count, setCount] = useState(0)
-  const [commentsCount, setCommentsCount] = useState(0)
-  const [comments, setComments] = useState([])
 
-  const sumLike = () => {
-    setCount(count + 1)
+function FeedPage() {
+
+  const history = useHistory()
+  const goBack = () => {
+    history.push("/")
   }
-  const subtractionLike = () => {
-    setCount(count - 1)
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if (token !== null) {
+      history.push('/login')
+    }
+  }, [history]);
+
+
+  const [post, setPost] = useState([])
+  const [textComment, setTextComment] = useState("")
+
+  const handleInputChange = (event) => {
+    setTextComment(event.target.value)
   }
-  const id = "EJOylTs3Xf1nvQGkmXTT"
+
   // const { id } = useParams()
   // const token = window.localStorage.getItem(token)
 
@@ -30,64 +43,151 @@ function FeedPage() {
     axios
       .get(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT`, axiosConfig)
       .then(response => {
-        setCount(response.data.post.votesCount)
-        setComments(response.data.post.comments)
-        setCommentsCount(response.data.post.commentsCount)
+        setPost(response.data.post)
+      })
+      .catch(e => {
+        alert(e)
       })
   }
-  console.log(comments)
+  const handleLike = () => {
+    const axiosConfig = {
+      headers: {
+        // auth: token 
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
+      }
+    }
+    const body = {
+      direction: 1
+    }
+    axios
+      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/vote`, body, axiosConfig)
+      .then(() => {
+        getDetails()
+      })
+      .catch(e => {
+        alert(e)
+      })
+  }
+  const handleDeslike = () => {
+    const axiosConfig = {
+      headers: {
+        // auth: token 
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
+      }
+    }
+    const body = {
+      direction: -1
+    }
+    axios
+      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/vote`, body, axiosConfig)
+      .then(() => {
+        getDetails()
+      })
+      .catch(e => {
+        alert(e)
+      })
+  }
+  const createComment = () => {
+    const axiosConfig = {
+      headers:
+      {
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
+      }
+    }
+    const body = {
+      text: textComment
+    }
+    axios
+      .post(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment`, body, axiosConfig)
+      .then(() => {
+        setTextComment("")
+        getDetails()
+      })
+  }
+  const handleCommentLike = (commentId) => {
+    const axiosConfig = {
+      headers: {
+        // auth: token 
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
+      }
+    }
+    const body = {
+      direction: 1
+    }
+    axios
+      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment/${commentId}/vote`, body, axiosConfig)
+      .then(() => {
+        getDetails()
+      })
+  }
+  const handleCommentDeslike = (commentId) => {
+    const axiosConfig = {
+      headers: {
+        // auth: token 
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
+      }
+    }
+    const body = {
+      direction: -1
+    }
+    axios
+      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment/${commentId}/vote`, body, axiosConfig)
+      .then(() => {
+        getDetails()
+      })
+      .catch(e => {
+        alert(e)
+      })
+  }
+
   useEffect(() => {
     getDetails()
   }, [])
+
   return (
     <AppContainer>
+      <button onClick={goBack}>VOLTAR</button>
       <PostContainer>
         <PostHeader>
-          <p>@usuario</p>
+          <p>@{post.username}</p>
         </PostHeader>
-
         <PostText>
-          <p>texto, texto, texto</p>
+          <p>{post.text}</p>
         </PostText>
-
         <PostFooter>
           <div>
-            <IconImage src={upIcon} onClick={sumLike}></IconImage>
-            {count}
-            <IconImage src={downIcon} onClick={subtractionLike}></IconImage>
+            <IconImage src={upIcon} onClick={handleLike}></IconImage>
+            {post.votesCount}
+            <IconImage src={downIcon} onClick={handleDeslike}></IconImage>
           </div>
-          <span>{commentsCount} {commentsCount === 0 || commentsCount === 1 ? (<span>Comentário</span>) : (<span>Comentários</span>)} </span>
+          <span>{post.commentsCount} {post.commentsCount === 0 || post.commentsCount === 1 ? (<span>Comentário</span>) : (<span>Comentários</span>)} </span>
         </PostFooter>
       </PostContainer>
 
       <CommentInputContainer>
-          <input placeholder="escreva um comentario!"/>
-        
-          <button>enviar comentário</button>
-  
+        <Input placeholder="escreva um comentario" value={textComment} onChange={handleInputChange} />
+        <button onClick={createComment}>COMENTAR</button>
       </CommentInputContainer>
 
-      {comments.length === 0 ? (<p>Carregando...</p>)
-        :
-        (comments.map(comment => {
-          return (
-            <div>
-              <CommentContainer>
-                <PostHeader>@{comment.username}</PostHeader>
-                <PostText>
-                  <p>{comment.text}</p>
-                </PostText>
-                <PostFooter>
-                  <div>
-                    <IconImage src={upIcon} onClick={sumLike} ></IconImage>
-                    {comment.votesCount}
-                    <IconImage src={downIcon} onClick={subtractionLike} ></IconImage>
-                  </div>
-                </PostFooter>
-              </CommentContainer>
-            </div>)
-        }))
+      {post.comments ? (post.comments.map(comment => {
+        return (
+          <div>
+            <CommentContainer>
+              <PostHeader>@{comment.username}</PostHeader>
+              <PostText>
+                <p>{comment.text}</p>
+              </PostText>
+              <PostFooter>
+                <IconImage src={upIcon} onClick={() => handleCommentLike(comment.id)} />
+                {comment.votesCount}
+                <IconImage src={downIcon} onClick={() => handleCommentDeslike(comment.id)} />
+              </PostFooter>
+            </CommentContainer>
+          </div>)
+      })) :
+        (<p>Carregando comentarios...</p>)
       }
+
     </AppContainer>
   );
 }
