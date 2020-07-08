@@ -1,148 +1,115 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { useParams, useHistory } from "react-router-dom";
+import axios from "axios";
 
-import { AppContainer, PostContainer, PostHeader, PostFooter, PostText, IconImage, CommentContainer, CommentInputContainer, Input } from './styles'
-import upIcon from '../../images/up.svg'
-import downIcon from '../../images/down.svg'
+import {
+  AppContainer,
+  PostContainer,
+  PostHeader,
+  PostFooter,
+  PostText,
+  IconImage,
+  CommentContainer,
+  CommentInputContainer,
+  Input,
+} from "./styles";
+import upIcon from "../../images/up.svg";
+import downIcon from "../../images/down.svg";
 
-const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
+const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit";
 
 function FeedPage() {
-
-  const history = useHistory()
-  const goBack = () => {
-    history.push("/")
-  }
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    if (token !== null) {
-      history.push('/login')
-    }
-  }, [history]);
-
-
-  const [post, setPost] = useState([])
-  const [textComment, setTextComment] = useState("")
+  const [post, setPost] = useState([]);
+  const [textComment, setTextComment] = useState("");
+  const [token, setToken] = useState(null);
 
   const handleInputChange = (event) => {
-    setTextComment(event.target.value)
-  }
+    setTextComment(event.target.value);
+  };
 
-  // const { id } = useParams()
+  const params = useParams();
+  const postId = params.id;
+
+  const history = useHistory();
+  const goBack = () => {
+    history.push("/");
+  };
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    setToken(token);
+    getDetails();
+    if (token === null) {
+      history.push("/login");
+    }
+  }, [history, token]);
+
   // const token = window.localStorage.getItem(token)
 
   const getDetails = () => {
     const axiosConfig = {
       headers: {
-        // auth: token 
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
+        Authorization: token,
+      },
+    };
     axios
-      .get(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT`, axiosConfig)
-      .then(response => {
-        setPost(response.data.post)
+      .get(`${baseUrl}/posts/${postId}`, axiosConfig)
+      .then((response) => {
+        setPost(response.data.post);
       })
-      .catch(e => {
-        alert(e)
-      })
-  }
-  const handleLike = () => {
-    const axiosConfig = {
-      headers: {
-        // auth: token 
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
-    const body = {
-      direction: 1
-    }
-    axios
-      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/vote`, body, axiosConfig)
-      .then(() => {
-        getDetails()
-      })
-      .catch(e => {
-        alert(e)
-      })
-  }
-  const handleDeslike = () => {
-    const axiosConfig = {
-      headers: {
-        // auth: token 
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
-    const body = {
-      direction: -1
-    }
-    axios
-      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/vote`, body, axiosConfig)
-      .then(() => {
-        getDetails()
-      })
-      .catch(e => {
-        alert(e)
-      })
-  }
+      .catch((e) => {});
+  };
+
   const createComment = () => {
     const axiosConfig = {
-      headers:
-      {
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
+      headers: {
+        Authorization: token,
+      },
+    };
     const body = {
-      text: textComment
-    }
+      text: textComment,
+    };
     axios
-      .post(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment`, body, axiosConfig)
+      .post(`${baseUrl}/posts/${postId}/comment`, body, axiosConfig)
       .then(() => {
-        setTextComment("")
-        getDetails()
-      })
-  }
-  const handleCommentLike = (commentId) => {
+        setTextComment("");
+        getDetails();
+      });
+  };
+
+  const handleVote = (commentId, userVote) => {
+    let vote = null;
+
+    if (userVote === "upvote") {
+      vote = 1;
+    } else if (userVote === "downvote") {
+      vote = -1;
+    }
+
     const axiosConfig = {
       headers: {
-        // auth: token 
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
+        Authorization: token,
+      },
+    };
+
     const body = {
-      direction: 1
-    }
+      direction: vote,
+    };
+
     axios
-      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment/${commentId}/vote`, body, axiosConfig)
+      .put(
+        `${baseUrl}/posts/${postId}/comment/${commentId}/vote`,
+        body,
+        axiosConfig
+      )
       .then(() => {
-        getDetails()
-      })
-  }
-  const handleCommentDeslike = (commentId) => {
-    const axiosConfig = {
-      headers: {
-        // auth: token 
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTQwNTU4NDR9.UShsvQabwdkTtCWi8bFwOw7SvsYiPqdizHjhRXLuHT4"
-      }
-    }
-    const body = {
-      direction: -1
-    }
-    axios
-      .put(`${baseUrl}/posts/3sXeMd3YXxKMgd1vfGiT/comment/${commentId}/vote`, body, axiosConfig)
-      .then(() => {
-        getDetails()
-      })
-      .catch(e => {
-        alert(e)
-      })
-  }
+        getDetails();
+      });
+  };
 
   useEffect(() => {
-    getDetails()
-  }, [])
+    getDetails();
+  }, []);
 
   return (
     <AppContainer>
@@ -156,38 +123,57 @@ function FeedPage() {
         </PostText>
         <PostFooter>
           <div>
-            <IconImage src={upIcon} onClick={handleLike}></IconImage>
+            <IconImage src={upIcon} onClick={handleVote}></IconImage>
             {post.votesCount}
-            <IconImage src={downIcon} onClick={handleDeslike}></IconImage>
+            <IconImage src={downIcon} onClick={handleVote}></IconImage>
           </div>
-          <span>{post.commentsCount} {post.commentsCount === 0 || post.commentsCount === 1 ? (<span>Comentário</span>) : (<span>Comentários</span>)} </span>
+          <span>
+            {post.commentsCount}{" "}
+            {post.commentsCount === 0 || post.commentsCount === 1 ? (
+              <span>Comentário</span>
+            ) : (
+              <span>Comentários</span>
+            )}{" "}
+          </span>
         </PostFooter>
       </PostContainer>
 
       <CommentInputContainer>
-        <Input placeholder="escreva um comentario" value={textComment} onChange={handleInputChange} />
+        <Input
+          placeholder="escreva um comentario"
+          value={textComment}
+          onChange={handleInputChange}
+        />
         <button onClick={createComment}>COMENTAR</button>
       </CommentInputContainer>
 
-      {post.comments ? (post.comments.map(comment => {
-        return (
-          <div>
-            <CommentContainer>
-              <PostHeader>@{comment.username}</PostHeader>
-              <PostText>
-                <p>{comment.text}</p>
-              </PostText>
-              <PostFooter>
-                <IconImage src={upIcon} onClick={() => handleCommentLike(comment.id)} />
-                {comment.votesCount}
-                <IconImage src={downIcon} onClick={() => handleCommentDeslike(comment.id)} />
-              </PostFooter>
-            </CommentContainer>
-          </div>)
-      })) :
-        (<p>Carregando comentarios...</p>)
-      }
-
+      {post.comments ? (
+        post.comments.map((comment) => {
+          return (
+            <div>
+              <CommentContainer>
+                <PostHeader>@{comment.username}</PostHeader>
+                <PostText>
+                  <p>{comment.text}</p>
+                </PostText>
+                <PostFooter>
+                  <IconImage
+                    src={upIcon}
+                    onClick={() => handleVote(comment.id, "upvote")}
+                  />
+                  {comment.votesCount}
+                  <IconImage
+                    src={downIcon}
+                    onClick={() => handleVote(comment.id, "downvote")}
+                  />
+                </PostFooter>
+              </CommentContainer>
+            </div>
+          );
+        })
+      ) : (
+        <p>Carregando comentarios...</p>
+      )}
     </AppContainer>
   );
 }
