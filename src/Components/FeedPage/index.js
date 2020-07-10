@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
-
+import RenderPosts from "./renderposts";
 import { useHistory } from "react-router-dom";
 
 import {
   MainContainer,
-  PostHeader,
-  PostContainer,
-  PostBottomContainer,
-  VoteWrapper,
+  Header,
   UserInput,
   UserInputContainer,
   PostButton,
 } from "./styles";
 
 import axios from "axios";
-
-import UpVoteIcon from "@material-ui/icons/KeyboardArrowUp";
-import DownVoteIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit";
 
@@ -54,6 +48,8 @@ function FeedPage() {
       });
   };
 
+  console.log(posts);
+
   const onInputPostChange = (event) => {
     setInputPostValue(event.target.value);
   };
@@ -81,224 +77,57 @@ function FeedPage() {
     setInputTitleValue("");
   };
 
-  const userVote = (postId, userVote) => {
-    let vote = 0;
-
-    if ((userVote = "upvote")) {
-      vote = 1;
-    } else if ((userVote = "downvote")) {
-      vote = -1;
-    }
-    const body = {
-      direction: vote,
-    };
-
-    axios
-      .put(`${baseUrl}/posts/${postId}/vote`, body, axiosConfig)
-      .then(() => {
-        console.log("Voto computado!");
-
-        getPosts();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
   const logout = () => {
     window.localStorage.removeItem("token");
     history.push("/login");
     window.location.reload(true);
   };
 
-  const goToPostDetails = (postId) => {
-    history.push(`/post/${postId}`);
-  };
-
-  const orderByUpvotesDesc = (a, b) => {
-    const postA = a.votesCount;
-    const postB = b.votesCount;
-
-    let comparison = 0;
-    if (postA < postB) {
-      comparison = 1;
-    } else if (postA > postB) {
-      comparison = -1;
-    }
-
-    return comparison;
-  };
-
-  const orderByUpvotesAsc = (a, b) => {
-    const postA = a.votesCount;
-    const postB = b.votesCount;
-
-    let comparison = 0;
-    if (postA > postB) {
-      comparison = 1;
-    } else if (postA < postB) {
-      comparison = -1;
-    }
-
-    return comparison;
-  };
-
   const onChangeSelect = (event) => {
     setSelectValue(event.target.value);
   };
 
-  function orderPostsBy() {
-    if (posts.length === 0) {
-      return <div>Carregando...</div>;
-    }
-    if (selectValue === "ASCENDENTE") {
-      return posts.sort(orderByUpvotesAsc).map((post) => {
-        return (
-          <PostContainer>
-            <PostHeader>
-              <h3>@{post.username}</h3>
-            </PostHeader>
-            <h4>{post.title}</h4>
-            <p>{post.text}</p>
-            <PostBottomContainer>
-              <span
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: 20,
-                }}
-              >
-                <VoteWrapper onClick={() => userVote(post.id, "upvote")}>
-                  <UpVoteIcon />
-                </VoteWrapper>
-                Votos: {post.votesCount}{" "}
-                <VoteWrapper onClick={() => userVote(post.id, "downvote")}>
-                  <DownVoteIcon />
-                </VoteWrapper>
-              </span>
-              <span
-                onClick={() => goToPostDetails(post.id)}
-                style={{ cursor: "pointer" }}
-              >
-                {post.commentsCount === 1 ? (
-                  <span>{post.commentsCount} comentário</span>
-                ) : (
-                  <span>{post.commentsCount} comentários</span>
-                )}
-              </span>
-            </PostBottomContainer>
-          </PostContainer>
-        );
-      });
-    } else if (selectValue === "DECRESCENTE") {
-      return posts.sort(orderByUpvotesDesc).map((post) => {
-        return (
-          <PostContainer>
-            <PostHeader>
-              <h3>@{post.username}</h3>
-            </PostHeader>
-            <h4>{post.title}</h4>
-            <p>{post.text}</p>
-            <PostBottomContainer>
-              <span
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: 20,
-                }}
-              >
-                <VoteWrapper onClick={() => userVote(post.id, "upvote")}>
-                  <UpVoteIcon />
-                </VoteWrapper>
-                Votos: {post.votesCount}{" "}
-                <VoteWrapper onClick={() => userVote(post.id, "downvote")}>
-                  <DownVoteIcon />
-                </VoteWrapper>
-              </span>
-              <span
-                onClick={() => goToPostDetails(post.id)}
-                style={{ cursor: "pointer" }}
-              >
-                {post.commentsCount === 1 ? (
-                  <span>{post.commentsCount} comentário</span>
-                ) : (
-                  <span>{post.commentsCount} comentários</span>
-                )}
-              </span>
-            </PostBottomContainer>
-          </PostContainer>
-        );
-      });
-    } else {
-      return posts.map((post) => {
-        return (
-          <PostContainer>
-            <PostHeader>
-              <h3>@{post.username}</h3>
-            </PostHeader>
-            <h4>{post.title}</h4>
-            <p>{post.text}</p>
-            <PostBottomContainer>
-              <span
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: 20,
-                }}
-              >
-                <VoteWrapper onClick={() => userVote(post.id, "upvote")}>
-                  <UpVoteIcon />
-                </VoteWrapper>
-                Votos: {post.votesCount}{" "}
-                <VoteWrapper onClick={() => userVote(post.id, "downvote")}>
-                  <DownVoteIcon />
-                </VoteWrapper>
-              </span>
-              <span
-                onClick={() => goToPostDetails(post.id)}
-                style={{ cursor: "pointer" }}
-              >
-                {post.commentsCount === 1 ? (
-                  <span>{post.commentsCount} comentário</span>
-                ) : (
-                  <span>{post.commentsCount} comentários</span>
-                )}
-              </span>
-            </PostBottomContainer>
-          </PostContainer>
-        );
-      });
-    }
-  }
-
   return (
     <MainContainer>
-      <h4>Bem-vindo, @{username}</h4>{" "}
-      <span>
-        <PostButton onClick={logout}>Logout</PostButton>
-      </span>
+      <Header>
+        <h4>Bem-vindo, @{username}</h4>
+        <PostButton onClick={logout} style={{ marginTop: 25 }}>
+          Logout
+        </PostButton>
+      </Header>
+      <label> Filtrar posts por: </label>
+      <select onChange={onChangeSelect}>
+        <option value="" />
+        <option value="DECRESCENTE">Mais votados</option>
+        <option value="ASCENDENTE">Menos votados</option>
+      </select>
       <UserInputContainer>
-        <UserInput
-          type="text"
-          value={inputPostValue}
-          onChange={onInputPostChange}
-          placeholder="No que você está pensando?"
-        />
+        <h3> Criar novo post </h3>
         <UserInput
           type="text"
           value={inputTitleValue}
           onChange={onInputPostTitleChange}
           placeholder="Título do post:"
         />
-        <PostButton onClick={createNewPost}>Postar</PostButton>
 
-        <select onChange={onChangeSelect}>
-          <option value="" />
-          <option value="DECRESCENTE">Mais votados</option>
-          <option value="ASCENDENTE">Menos votados</option>
-        </select>
+        <UserInput
+          type="text"
+          value={inputPostValue}
+          onChange={onInputPostChange}
+          placeholder="No que você está pensando?"
+          style={{ minHeight: 100 }}
+        />
+
+        <PostButton onClick={createNewPost}>Postar</PostButton>
       </UserInputContainer>
-      {orderPostsBy()}
+
+      <RenderPosts
+        posts={posts}
+        selectValue={selectValue}
+        getPosts={getPosts}
+        token={token}
+        baseUrl={baseUrl}
+      />
     </MainContainer>
   );
 }
