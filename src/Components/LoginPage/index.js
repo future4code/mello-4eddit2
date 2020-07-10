@@ -45,6 +45,7 @@ function LoginPage() {
       const response = await Axios.post(`${baseUrl}/login`, loginBody);
 
       window.localStorage.setItem("token", response.data.token);
+      window.localStorage.setItem("username", response.data.user.username);
       alert("Login efetuado com sucesso!");
       history.push("/");
     } catch (error) {
