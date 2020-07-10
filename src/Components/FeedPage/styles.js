@@ -40,14 +40,12 @@ export const UsernameText = styled.h3`
 
 export const PostContainer = styled.div`
   width: 460px;
-  height: 190px;
-  left: 490px;
-  top: 110px;
+  min-height: 180px;
   background: rgba(4, 210, 255, 0.12);
   border: 1px solid rgba(0, 0, 0, 0.72);
   box-sizing: border-box;
   border-radius: 11px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   &:hover {
     transition-duration: 250ms;
     background-color: #eef;

@@ -29,6 +29,10 @@ function FeedPage() {
     setUsername(username);
     setToken(token);
     getPosts();
+
+    if (token === null) {
+      history.push("/login");
+    }
   }, [history, token]);
 
   const axiosConfig = {
