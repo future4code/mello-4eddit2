@@ -8,8 +8,10 @@ export const AppContainer = styled.div`
     margin-top: 10px;
 `
 export const PostContainer = styled.div`
-    border: 1px solid gray;
-    width: 500px;
+    width: 460px;
+    background: rgba(4, 210, 255, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.72);
+    border-radius: 11px;
     margin-top: 10px;
 `
 export const PostHeader = styled.div`
@@ -43,11 +45,14 @@ export const CommentContainer = styled.div`
     margin-top: 10px;
 `
 export const CommentInputContainer = styled.div`
-    border: 1px solid orange;
-    width: 400px;
-    margin-top: 10px;
+    width: 402px;
+    height: 150px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 11px;
     display: flex;
     flex-direction: column;
+    align-content: center;
 `
 export const Input = styled.input`
     text-align: center;
