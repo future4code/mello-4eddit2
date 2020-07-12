@@ -4,7 +4,15 @@ import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
-const Form = styled.div`
+import {
+  Form,
+  Label,
+  UserInput,
+  UserInputContainer,
+  Button,
+} from "./styles";
+
+/* const Form = styled.div`
   display: grid;
   justify-content: space-evenly;
   align-items: center;
@@ -12,7 +20,7 @@ const Form = styled.div`
   width: 600px;
   height: 500px;
   margin: auto;
-`;
+`; */
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -63,30 +71,32 @@ function SignUp() {
 
   return (
     <Form>
-      <label>
+      <Label>
         <strong>CADASTRO DE USUÁRIO</strong>
-      </label>
-      <input
-        type="text"
-        placeholder="Nome de usuário"
-        value={username}
-        onChange={handleUserName}
-      />
+      </Label>
+      <UserInputContainer>
+        <UserInput
+          type="text"
+          placeholder="Nome de usuário"
+          value={username}
+          onChange={handleUserName}
+        />
 
-      <input
-        type="email"
-        placeholder="E-mail"
-        value={email}
-        onChange={handleUpdateEmail}
-      />
+        <UserInput
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={handleUpdateEmail}
+        />
 
-      <input
-        placeholder="Senha"
-        value={password}
-        onChange={handleUpdatePassword}
-      />
+        <UserInput
+          placeholder="Senha"
+          value={password}
+          onChange={handleUpdatePassword}
+        />
 
-      <button onClick={signUp}>Cadastrar</button>
+        <Button onClick={signUp}>Cadastrar</Button>
+      </UserInputContainer>
     </Form>
   );
 }
