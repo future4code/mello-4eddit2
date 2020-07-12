@@ -12,10 +12,14 @@ import {
   CommentContainer,
   CommentInputContainer,
   Input,
+  Button
 } from "./styles";
 import upIcon from "../../images/up.svg";
 import downIcon from "../../images/down.svg";
-
+import UpVoteIcon from "@material-ui/icons/ThumbUpOutlined";
+import UpVoteFilledIcon from "@material-ui/icons/ThumbUp";
+import DownVoteIcon from "@material-ui/icons/ThumbDownOutlined";
+import DownVoteFilledIcon from "@material-ui/icons/ThumbDown";
 const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit";
 
 function FeedPage() {
@@ -43,8 +47,6 @@ function FeedPage() {
       history.push("/login");
     }
   }, [history, token]);
-
-  // const token = window.localStorage.getItem(token)
 
   const getDetails = () => {
     const axiosConfig = {
@@ -113,7 +115,7 @@ function FeedPage() {
 
   return (
     <AppContainer>
-      <button onClick={goBack}>VOLTAR</button>
+      <Button onClick={goBack}>VOLTAR</Button>
       <PostContainer>
         <PostHeader>
           <p>@{post.username}</p>
@@ -123,9 +125,9 @@ function FeedPage() {
         </PostText>
         <PostFooter>
           <div>
-            <IconImage src={upIcon} onClick={handleVote}></IconImage>
+            <UpVoteFilledIcon style={{ height: 12, width: 12 }} onClick={handleVote} />
             {post.votesCount}
-            <IconImage src={downIcon} onClick={handleVote}></IconImage>
+            <DownVoteFilledIcon style={{ height: 12, width: 12 }} />
           </div>
           <span>
             {post.commentsCount}{" "}
@@ -144,7 +146,7 @@ function FeedPage() {
           value={textComment}
           onChange={handleInputChange}
         />
-        <button onClick={createComment}>COMENTAR</button>
+        <Button onClick={createComment}>COMENTAR</Button>
       </CommentInputContainer>
 
       {post.comments ? (
@@ -157,15 +159,16 @@ function FeedPage() {
                   <p>{comment.text}</p>
                 </PostText>
                 <PostFooter>
-                  <IconImage
-                    src={upIcon}
-                    onClick={() => handleVote(comment.id, "upvote")}
-                  />
-                  {comment.votesCount}
-                  <IconImage
-                    src={downIcon}
-                    onClick={() => handleVote(comment.id, "downvote")}
-                  />
+                  <IconImage>
+                    <UpVoteFilledIcon style={{ height: 12, width: 12 }} 
+                      onClick={() => handleVote(comment.id, "upvote")}
+                    />
+                    {comment.votesCount}
+                    <DownVoteFilledIcon style={{ height: 12, width: 12 }}
+                      src={downIcon}
+                      onClick={() => handleVote(comment.id, "downvote")}
+                    />
+                  </IconImage>
                 </PostFooter>
               </CommentContainer>
             </div>

@@ -116,6 +116,10 @@ export const PostButton = styled.button`
   margin: 0 auto;
   margin-bottom: 20px;
   cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+  &:active {
+    background-color: rgba(4, 210, 255, 0.12);
+  }
 `;
 
 export const UserInput = styled.input`
@@ -123,4 +127,5 @@ export const UserInput = styled.input`
   width: 80%;
   margin: 0 auto;
   margin-bottom: 20px;
+  font-family: "Roboto Mono", monospace;
 `;

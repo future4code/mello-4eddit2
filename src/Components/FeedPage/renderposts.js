@@ -14,7 +14,7 @@ import {
   CommentsText,
 } from "./styles";
 
-import editIcon from "../../images/edit.svg";
+import editIcon from '../../images/edit.svg'
 import UpVoteIcon from "@material-ui/icons/ThumbUpOutlined";
 import UpVoteFilledIcon from "@material-ui/icons/ThumbUp";
 import DownVoteIcon from "@material-ui/icons/ThumbDownOutlined";

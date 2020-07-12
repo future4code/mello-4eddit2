@@ -6,6 +6,7 @@ export const AppContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
+    font-family: "Roboto Mono", monospace;
 `
 export const PostContainer = styled.div`
     width: 460px;
@@ -13,6 +14,7 @@ export const PostContainer = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.72);
     border-radius: 11px;
     margin-top: 10px;
+    font-family: "Roboto Mono", monospace;
 `
 export const PostHeader = styled.div`
     height: 40px;
@@ -36,25 +38,49 @@ export const PostFooter = styled.div`
     justify-content: space-between;
 `
 export const IconImage = styled.img`
-    height: 20px;
     cursor: pointer;
 `
 export const CommentContainer = styled.div`
+    font-family: "Roboto Mono", monospace;
     border: 1px solid gray;
     width: 300px;
     margin-top: 10px;
+    border-radius: 11px;
 `
 export const CommentInputContainer = styled.div`
-    width: 402px;
-    height: 150px;
+    text-align: center;
+    width: 460px;
+    min-height: 100px;
     border: 1px solid #000000;
     box-sizing: border-box;
     border-radius: 11px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    align-content: center;
 `
 export const Input = styled.input`
+    min-height: 50px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center;
-    color: black;
+    font-family: "Roboto Mono", monospace;
+`
+
+export const Button = styled.button`
+    background-color: #fff;
+    width: 25%;
+    height: 30px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 51px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-family: "Roboto Mono", monospace;
+        &:hover {
+        transition-duration: 250ms;
+        background-color: #eef;
+  }
 `
