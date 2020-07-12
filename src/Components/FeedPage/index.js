@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import RenderPosts from "./renderposts";
 import { useHistory } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+
+import { lightTheme, darkTheme } from "../Theme";
 
 import {
   MainContainer,
