@@ -1,68 +1,115 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  🚀️ Front-end Web ✔ 4eddit2 ✔
+</h1>
+<h3 align="center">
+  Status do Projeto: Em desenvolvimento ⚠
+</h3>
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/future4code/mello-4eddit2">
 
-### `npm start`
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/mello-4eddit2?logo=javascript">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <img alt="GitHub repo size in bytes" src="https://img.shields.io/github/repo-size/future4code/mello-4eddit2?color=orange">
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <br>
 
-### `npm test`
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/last-commit/future4code/mello-4eddit2">
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  <a href="https://www.linkedin.com/in/alessandra-martines-807265180/">
+    <img alt="By ->" src="https://img.shields.io/badge/Create%20by-Alessandra%2F%20Fabr%C3%ADcio%2F%20Lais-pink">
+  </a>
+</p>
 
-### `npm run build`
+# Indice
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- :rocket: [Sobre o Projeto e suas aplicações](#rocket-sobre-o-projeto)
+- 👩🇧🇷 [Tecnogias utilizadas](#%EF%B8%8F-tecnogias-utilizadas)
+- 📦️ [Como utilizar o projeto](#%EF%B8%8F-como-utilizar-o-projeto)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :rocket: Sobre o Projeto
 
-### `npm run eject`
+A proposta do **4Eddit2** da [Labenu](https://labenu.com.br/) é desenvolver uma aplicação que simule um instagram, usando 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Este projeto de Front-end Web foi desenvolvido em ReactJS com JS.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Aplicações
+- Página de login:
+    - Captação de login e senha
+    - Cadastro (botão que leva a página de cadastro)
+- Página de cadastro de usuário:
+    - Captação de nome de usuário, e-mail e senha
+- Página Feed:
+    - Bem vindo com o nome de usuário
+    - Botão de logout
+    - Filtro de posts (mais votados e menos votados)
+    - Criar novo post (Contendo título e caixa para texto)
+    - Banco de dados utilizando api para os posts feitos por outros usuários
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 👩🇧🇷 Tecnogias utilizadas
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ReactJS](https://reactjs.org/)
 
-### Code Splitting
+### Dependências
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router DOM](https://github.com/ReactTraining/react-router#readme)
+- :nail_care: [Styled Components](https://styled-components.com/)
 
-### Analyzing the Bundle Size
+### Padronização de código
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- :mouse: [Editor Config](https://editorconfig.org/)
 
-### Making a Progressive Web App
+### IDE
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-### Advanced Configuration
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## 📦️ Como utilizar o projeto
 
-### Deployment
+Para copiar o projeto, utilize os comandos:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```bash
+  # Clonar o repositório
+  ❯ git clone https://github.com/alessandra-leka/4eddit2.git
+```
 
-### `npm run build` fails to minify
+Para instalar as dependências e iniciar o projeto, utilize o NPM:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Usando npm**
+
+```bash
+  # Instalar as dependências
+  ❯ npm install
+
+  # Iniciar o projeto
+  ❯ npm start
+```
+<h1 align="center">
+  Mídias Sociais
+</h1>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/alessandra-martines-807265180/">
+    <img alt="Alessandra-Leka" src="https://img.shields.io/badge/LinkedIn-Alessandra-pink">
+  </a>
+   <a href="https://www.instagram.com/lekinhalessandra/">
+    <img alt="Alessandra-Leka" src="https://img.shields.io/badge/Instagram-%40lekinhalessandra-pink">
+  </a>
+</p>
+
+<h4 align="center">
+  ❤️ Alessandra Bertelli - Leka <a href="mailto:leka.produtora@gmail.com"> 💌 Entre em contato!</a>
+</h4>
