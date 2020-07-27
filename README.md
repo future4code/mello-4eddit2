@@ -1,39 +1,115 @@
-## Exercício da Semana:
+<h1 align="center">
+  🚀️ Front-end Web ✔ 4eddit2 ✔
+</h1>
+<h3 align="center">
+  Status do Projeto: Em desenvolvimento ⚠
+</h3>
 
-Essa semana, vocês irão implementar uma rede social! Já fizemos vários protótipos de redes sociais, mas nenhuma delas realmente funcional. A ideia agora é fazer uma rede real, com cadastro, login, posts, likes e comentários. Para isso, iremos nos basear no **[reddit.com](https://reddit.com).**
+<br>
 
-A rede social terá 4 páginas:
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/future4code/mello-4eddit2">
 
-### Página de login
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/mello-4eddit2?logo=javascript">
 
-![1](https://user-images.githubusercontent.com/3521896/77802249-3ada3280-7059-11ea-9da7-5762c6daf97d.png)
+  <img alt="GitHub repo size in bytes" src="https://img.shields.io/github/repo-size/future4code/mello-4eddit2?color=orange">
 
-A página de login possui dois campos de texto: email e senha. O comportamento será o mesmo da página de login feita semana passada. Ao fazer o login, o usuário deverá ser redirecionado para a página de feed.
+  <br>
 
-A página possui também um botão "Cadastrar", que leva o usuário para a página de cadastro.
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/last-commit/future4code/mello-4eddit2">
 
-### Página de cadastro
+  <a href="https://www.linkedin.com/in/alessandra-martines-807265180/">
+    <img alt="By ->" src="https://img.shields.io/badge/Create%20by-Alessandra%2F%20Fabr%C3%ADcio%2F%20Lais-pink">
+  </a>
+</p>
 
-![2](https://user-images.githubusercontent.com/3521896/77802253-3ca3f600-7059-11ea-8bc9-e43db687e62c.png)
+# Indice
 
-A página de cadastro possui 3 campos: nome de usuário, email e senha. O endpoint de cadastro retornará as mesmas informações do endpoint de login. Portanto, após cadastrar, o usuário deverá ser redirecionado para a página de feed, já estando logado (ou seja, com o token salvo no LocalStorage).
+- :rocket: [Sobre o Projeto e suas aplicações](#rocket-sobre-o-projeto)
+- 👩🇧🇷 [Tecnogias utilizadas](#%EF%B8%8F-tecnogias-utilizadas)
+- 📦️ [Como utilizar o projeto](#%EF%B8%8F-como-utilizar-o-projeto)
 
-### Página de feed (lista de posts)
+---
 
-![3](https://user-images.githubusercontent.com/3521896/77802257-3e6db980-7059-11ea-9978-cc4612e444a1.png)
+## :rocket: Sobre o Projeto
 
-A página de feed deverá mostrar todos os posts, além de um formulário para a criação de post. O formulário possui apenas o campo de texto. Cada post mostrará o nome de usuário que postou, o texto do post, o número de votos (positivo ou negativo) e o número de comentários. Caso o usuário tenha votado positiva ou negativamente, isso deverá estar indicado. Todas essa informações serão fornecidas pela API.
+A proposta do **4Eddit2** da [Labenu](https://labenu.com.br/) é desenvolver uma aplicação que simule um instagram, usando 
 
-Quando o usuário clicar em um post, ele deverá ser redirecionado para a página do respectivo post. 
+Este projeto de Front-end Web foi desenvolvido em ReactJS com JS.
 
-Quando um usuário clicar em votar (positiva ou negativamente), uma requisição deverá ser feita indicando a "direção" do voto. Um voto positivo é indicado com o número `1`. Um voto negativo é indicado com o número `-1`. Para remover um voto, a direção deve ser `0`.
 
-Essa página só pode ser acessada por um usuário logado. Caso o usuário não esteja logado, deverá ser redirecionado para a página de login.
+### Aplicações
+- Página de login:
+    - Captação de login e senha
+    - Cadastro (botão que leva a página de cadastro)
+- Página de cadastro de usuário:
+    - Captação de nome de usuário, e-mail e senha
+- Página Feed:
+    - Bem vindo com o nome de usuário
+    - Botão de logout
+    - Filtro de posts (mais votados e menos votados)
+    - Criar novo post (Contendo título e caixa para texto)
+    - Banco de dados utilizando api para os posts feitos por outros usuários
 
-### Página de post
+---
 
-![4](https://user-images.githubusercontent.com/3521896/77802261-40377d00-7059-11ea-8f65-2b305bf5e6f8.png)
+## 👩🇧🇷 Tecnogias utilizadas
 
-A página de um post mostrará o mesmo card de post da página de feed, com o usuário, texto, curtidas e número de comentários. Abaixo, terá um formulário para criação de comentários e os cards de comentários. A estrutura é muito similar à do post, mas comentários não possuem outros comentários dentro deles. A lógica de votos é a mesma do post.
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-Essa página só pode ser acessada por um usuário logado. Caso o usuário não esteja logado, deverá ser redirecionado para a página de login.
+- [ReactJS](https://reactjs.org/)
+
+### Dependências
+
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router DOM](https://github.com/ReactTraining/react-router#readme)
+- :nail_care: [Styled Components](https://styled-components.com/)
+
+### Padronização de código
+
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- :mouse: [Editor Config](https://editorconfig.org/)
+
+### IDE
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+---
+
+## 📦️ Como utilizar o projeto
+
+Para copiar o projeto, utilize os comandos:
+
+```bash
+  # Clonar o repositório
+  ❯ git clone https://github.com/alessandra-leka/4eddit2.git
+```
+
+Para instalar as dependências e iniciar o projeto, utilize o NPM:
+
+**Usando npm**
+
+```bash
+  # Instalar as dependências
+  ❯ npm install
+
+  # Iniciar o projeto
+  ❯ npm start
+```
+<h1 align="center">
+  Mídias Sociais
+</h1>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/alessandra-martines-807265180/">
+    <img alt="Alessandra-Leka" src="https://img.shields.io/badge/LinkedIn-Alessandra-pink">
+  </a>
+   <a href="https://www.instagram.com/lekinhalessandra/">
+    <img alt="Alessandra-Leka" src="https://img.shields.io/badge/Instagram-%40lekinhalessandra-pink">
+  </a>
+</p>
+
+<h4 align="center">
+  ❤️ Alessandra Bertelli - Leka <a href="mailto:leka.produtora@gmail.com"> 💌 Entre em contato!</a>
+</h4>
